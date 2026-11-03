@@ -8,12 +8,6 @@ from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QTabWidget, QVBoxLayout, QHBoxLayout, QLabel, \
     QLineEdit, QTableWidget, QTableWidgetItem, QHeaderView, QFrame, QAbstractItemView, QPushButton, QComboBox, QSpinBox, QMessageBox
 
-#tutaj wciskasz ilości żetonów z bazy danych
-ilosci = DataManager.get_zetony_by_machine_id(1).zetony
-transakcje = DataManager.get_historia()
-nominaly = DataManager.nominaly
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -208,6 +202,11 @@ class Historia(QWidget):
                 tabelka.setItem(wiersz, kolumna, element)
 
 DataManager.init_db()
+#tutaj wciskasz ilości żetonów z bazy danych
+ilosci = DataManager.get_zetony_by_machine_id(1).zetony
+transakcje = DataManager.get_historia()
+nominaly = DataManager.nominaly
+
 app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
