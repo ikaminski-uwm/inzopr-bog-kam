@@ -17,13 +17,14 @@ class MainWindow(QMainWindow):
 
         tabs = QTabWidget()
         tabs.setMovable(False)
-        self.Automaty = Automaty()
+        self.automaty = Automaty()
         self.historia = Historia()
 
         tabs = QTabWidget()
         tabs.setMovable(False)
-        tabs.addTab(self.Automaty, "Stan Automatów") #nazwa zakładki automatów
+        tabs.addTab(self.automaty, "Stan Automatów") #nazwa zakładki automatów
         tabs.addTab(self.historia, "Historia Transakcji") #nazwa zakładki historii
+        tabs.currentChanged.connect(self.historia.narysuj_tabele)
 
         self.setCentralWidget(tabs)
 
@@ -90,8 +91,10 @@ class Automaty(QWidget):
             self.d_ilosci[n] = ilosc
 
             transakcja = QSpinBox()
+            transakcja.setMaximum(9999)
             transakcja.setFixedSize(80, 30)
             self.spinboxy[n] = transakcja
+            
 
             kolumny2.addWidget(nominal, 1)
             kolumny2.addWidget(ilosc, 1, Qt.AlignmentFlag.AlignCenter)
@@ -131,10 +134,12 @@ class Automaty(QWidget):
         zestaw = DataManager.ZestawZetonow(lista_wartosci)
         DataManager.add_zetony(zestaw, 1)
         transakcje = DataManager.get_historia()
+        ilosci = DataManager.get_zetony_by_machine_id(1).zetony
         self.aktualizuj_ilosci()
 
 
     def usun_w(self):
+        ilosci = DataManager.get_zetony_by_machine_id(1).zetony
         zawartosc_transakcji = {}
         for n in nominaly:
             zawartosc_transakcji[n] = self.spinboxy[n].value()
@@ -146,6 +151,7 @@ class Automaty(QWidget):
         lista_wartosci = DataManager.wartosci_dict_to_list(zawartosc_transakcji)
         zestaw = DataManager.ZestawZetonow(lista_wartosci)
         DataManager.remove_zetony(zestaw, 1)
+        ilosci = DataManager.get_zetony_by_machine_id(1).zetony
         self.aktualizuj_ilosci()
 
 
@@ -164,42 +170,34 @@ class Historia(QWidget):
         tytul.setAlignment(Qt.AlignmentFlag.AlignCenter)
         wiersz.addWidget(tytul)
 
-        tabelka = QTableWidget()
-        tabelka.setColumnCount(8)
-        tabelka.setHorizontalHeaderLabels(["Data", "Automat", "Wpłata?", "10", "20", "50", "100", "200"])
-        tabelka.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        tabelka.setShowGrid(False)
-        tabelka.verticalHeader().setVisible(False)
-        tabelka.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabelka = QTableWidget()
+        self.tabelka.setColumnCount(8)
+        self.tabelka.setHorizontalHeaderLabels(["Data", "Automat", "Wpłata?", "10", "20", "50", "100", "200"])
+        self.tabelka.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.tabelka.setShowGrid(False)
+        self.tabelka.verticalHeader().setVisible(False)
+        self.tabelka.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
 
-        wiersz.addWidget(tabelka)
+        wiersz.addWidget(self.tabelka)
+        self.narysuj_tabele()
 
         #                     |
         # historia transakcji v
-        G_tabelka = tabelka
-        tabelka.setRowCount(len(transakcje))
-
-
+    def narysuj_tabele(self):
+        transakcje = DataManager.get_historia()
+        self.tabelka.setRowCount(len(transakcje))
         for wiersz, dane in enumerate(transakcje): #dodawajka historii do historii transakcji
-
-
-
-
-
-            #Zrób tak, żeby się aktualizowało po każdej transakcji i będziesz złoty!
-
-
-
-
-
             for kolumna, wartosc in enumerate(dane.to_list()):
                 element = QTableWidgetItem(wartosc)
 
                 element.setTextAlignment(
-                    Qt.AlignmentFlag.AlignCenter
-                )
 
-                tabelka.setItem(wiersz, kolumna, element)
+                    Qt.AlignmentFlag.AlignCenter
+
+                )
+                self.tabelka.setItem(wiersz, kolumna, element)
+
+
 
 DataManager.init_db()
 #tutaj wciskasz ilości żetonów z bazy danych
