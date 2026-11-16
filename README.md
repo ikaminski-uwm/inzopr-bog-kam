@@ -8,5 +8,5 @@
 | Zakres funkcjonalny: |  **ID Funkcjonalność Zakres** F01 Użytkownik ma wgląd do ilości żetonów w magazynie MVP F02 Użytkownik może wprowadzać zmiany ilości żetonów w magazynie po fizycznym ich wyjęciu. MVP F03 Użytkownik ma wgląd do chronologicznej historii transakcji. MVP F04 System informuje użytkownika o małej oraz krytycznej ilości żetonów w magazynie i/lub automatach. MVP F05 Walidacja nie pozwala wprowadzenie niepoprawnych danych. MVP F06 System automatycznie aktualizuje historię transakcji po dokonanych zmianach. MVP  |
 | Poza zakresem: | Obsługa wielu automatów Dynamiczne dostosowywanie istniejących nominałów |
 | Organizacja współpracy: | Separacja Frontend/Backend, ze zrozumieniem tego że okazjonalnie problemy mogą nas przerosnąć, więc w porządku jest prosić o pomoc. |
-| Odnośniki: |  [GitLab](https://gitlab.com/Gegrod/inzopr-bog-kam) LaboChat (tymczasowo nie mamy dostępu do linka)  |
+| Odnośniki: |  [GitLab](https://gitlab.com/Gegrod/inzopr-bog-kam) [LaboChat](https://inzopr-bog-kam.labochat.com/)  |
 
