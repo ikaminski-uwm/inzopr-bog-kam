@@ -23,4 +23,3 @@
 | 4\. Integracja frontendu z publicznymi funkcjami backendu | Baza Danych | Program populowany danymi z bazy danych |
 | Sprawdzenie spójności | Zintegrowany frontend i backend | Wszystkie przewidziane funkcje programu działają w przewidywalny i poprawny sposób. |
 
-d3GGXzCD0nJ8dY5xF6QkKCjNAjIiKM7YxH6CUlJQ7bwH8h0AF8mFmgNzc307Bhw2j27Nny2B7PoaenpxvrWVlZNHPmTDp16hQFBwfLGwHj5/GF1YqKCuNY8G8IdAAfZhboGzdupKFDh1JTU5PDwvgul549e1J1dbVcJOVbG4uLi2Ufj+gXL14sj1esWCG3LkLgQKAD+DCzQF+wYIHsc174bhfG96FzkPOFUvv70PkOF55jj4yMxH3oAQiBDuDDzAIdoCUIdAAfhkAHFQh0AB+GQAcVCHQAH4ZABxUIdAAfhkAHFQh0AB+GQAcVCHQAH4ZABxUIdAAfhkAHFQh0AB+GQAcVCHQAH8YnKBYsKov0jVMfAQCAn/o/rN7lNNH8WdkAAAAASUVORK5CYII=>
