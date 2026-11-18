@@ -116,6 +116,7 @@ class Automaty(QWidget):
         wiersz.addLayout(przyciski)
 
         self.aktualizuj_ilosci()
+        self.sprawdz()
 
 
     def aktualizuj_ilosci(self):
@@ -124,6 +125,7 @@ class Automaty(QWidget):
         for n in nominaly:
             self.d_ilosci[n].setText(str(ilosci[n]))
         transakcje = DataManager.get_historia()
+        self.sprawdz()
 
     def dodaj_w(self):
         zawartosc_transakcji = {}
@@ -153,6 +155,20 @@ class Automaty(QWidget):
         DataManager.remove_zetony(zestaw, 1)
         ilosci = DataManager.get_zetony_by_machine_id(1).zetony
         self.aktualizuj_ilosci()
+
+    def sprawdz(self):
+        ilosci = DataManager.get_zetony_by_machine_id(1).zetony
+        for klucz in ilosci.keys():
+            if ilosci[klucz] <= 50:
+                kolor = hex(int(ilosci[klucz]/50 * 255))[2:]
+                if len(kolor) < 2:
+                    kolor += "0"
+                print(f"#FF{kolor}00")
+                self.d_ilosci[klucz].setStyleSheet(f"""background-color: #FF{kolor}00""")
+            else:
+                self.d_ilosci[klucz].setStyleSheet(f"""background-color: #FFFFFF""")
+
+
 
 
 
@@ -200,11 +216,13 @@ class Historia(QWidget):
 
 
 
+
 DataManager.init_db()
 #tutaj wciskasz ilości żetonów z bazy danych
 ilosci = DataManager.get_zetony_by_machine_id(1).zetony
 transakcje = DataManager.get_historia()
 nominaly = DataManager.nominaly
+prog_ost = [5, 15]
 
 app = QApplication(sys.argv)
 window = MainWindow()
