@@ -185,16 +185,17 @@ class Historia(QWidget):
         # historia transakcji v
     def narysuj_tabele(self):
         transakcje = DataManager.get_historia()
+        transakcje.reverse()
+        czerwony = QtGui.QColor(220, 110, 110)
+        zielony = QtGui.QColor(120, 220, 110)
         self.tabelka.setRowCount(len(transakcje))
         for wiersz, dane in enumerate(transakcje): #dodawajka historii do historii transakcji
             for kolumna, wartosc in enumerate(dane.to_list()):
                 element = QTableWidgetItem(wartosc)
-
-                element.setTextAlignment(
-
-                    Qt.AlignmentFlag.AlignCenter
-
-                )
+                if(kolumna == 2):
+                    if(wartosc == "Nie"): element.setBackground(czerwony)
+                    else: element.setBackground(zielony)
+                element.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                 self.tabelka.setItem(wiersz, kolumna, element)
 
 
