@@ -1,5 +1,6 @@
 import sqlite3
 import time
+from datetime import datetime
 
 db_file = "local.db"
 nominaly = [10, 20, 50, 100, 200]
@@ -83,7 +84,7 @@ class Transakcja():
         return "Nie"
 
     def to_list(self) -> list[str]:
-        return [str(self.data_czas), "Magazyn", self._bool_to_localized_string(self.is_wplata),
+        return [datetime.fromtimestamp(self.data_czas).strftime("%d-%m-%y, %H:%M"), "Magazyn", self._bool_to_localized_string(self.is_wplata),
             str(self.zawartosc.zetony[10]), str(self.zawartosc.zetony[20]), str(self.zawartosc.zetony[50]), 
             str(self.zawartosc.zetony[100]), str(self.zawartosc.zetony[200])]
 
